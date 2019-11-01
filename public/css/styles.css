@@ -37,3 +37,13 @@
     color: #fff;
     text-decoration: none;
 }
+#welcome{
+    color: burlywood;
+}
+h1{
+    text-align: center;
+}
+#main{
+    margin-top: 60px;
+    margin-bottom: 50px;
+}
