@@ -13,6 +13,7 @@ const User = require('./models/user.js');
 // Link passports to the server
 require('./passport/google-passport');
 require('./passport/facebook-passport');
+require('./passport/instagram-passport');
 // Initialize application
 const app = express();
 // Express config
@@ -88,6 +89,16 @@ app.get('/auth/facebook/callback',
         // Successful authentication, redirect home.
         res.redirect('/profile');
     });
+// HANDLE INSTAGRAM AUTH ROUTE
+app.get('/auth/instagram',
+  passport.authenticate('instagram'));
+
+app.get('/auth/instagram/callback', 
+  passport.authenticate('instagram', { failureRedirect: '/' }),
+  (req, res) => {
+    // Successful authentication, redirect home.
+    res.redirect('/profile');
+  });
 // Handle profile route
 app.get('/profile', (req, res) => {
     User.findById({_id: req.user._id})
