@@ -108,6 +108,18 @@ app.get('/profile', (req, res) => {
         });
     })
 });
+// HANDLE EMAIL POST ROUTE
+app.post('/addEmail', (req, res) => {
+    const email = req.body.email;
+    User.findById({_id: req.user._id})
+    .then((user) => {
+        user.email = email;
+        user.save()
+        .then(() => {
+            res.redirect('/profile');
+        });
+    });
+});
 // Handle User Logout Route
 app.get('/logout', (req, res) => {
     req.logout();

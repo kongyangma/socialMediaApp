@@ -21,5 +21,25 @@ passport.use(new InstagramStrategy({
   },
   (accessToken, refreshToken, profile, done) => {
      console.log(profile);
+     User.findOne({instagram:profile.id})
+     .then((user) => {
+         if(user){
+             done(null, user);
+         }else{
+             const newUser = {
+                 instagram: profile.id,
+                 firstname: profile.displayName.substring(0, profile.displayName.indexOf(' ')),
+                 lastname: profile.displayName.substring(profile.displayName.indexOf(' '), profile.displayName.length),
+                 fullname: profile.displayName,
+                 image: profile._json.data.profile_picture
+             }
+             new User(newUser).save()
+             .then((user) => {
+                 done(null, user);
+             })
+         }
+     }).catch((err) => {
+         if(err) throw err;
+     })
   }
 ));
