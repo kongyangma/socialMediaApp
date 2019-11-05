@@ -24,8 +24,7 @@
       {{else}}
       <form action="/addPhone" method="POST" class="form-inline">
         <div class="form-group mx-sm-3 mb-2">
-          <input type="number" name="phone" class="form-control" 
-           placeholder="Enter phone number" required>
+          <input type="number" name="phone" class="form-control" placeholder="Enter phone number" required>
         </div>
         <button type="submit" class="btn btn-primary mb-2">
           <i class="fa fa-check"></i></button>
@@ -36,13 +35,35 @@
       {{else}}
       <form action="/addLocation" method="POST" class="form-inline">
         <div class="form-group mx-sm-3 mb-2">
-          <input type="text" name="location" class="form-control" 
-           placeholder="Enter your location / city and country" required>
+          <input type="text" name="location" class="form-control" placeholder="Enter your location / city and country"
+            required>
         </div>
         <button type="submit" class="btn btn-primary mb-2">
           <i class="fa fa-check"></i></button>
       </form>
       {{/if}}
     </div>
+  </div>
+  <div class="container">
+    <h1>My Posts</h1>
+    {{#each posts}}
+    <div class="media">
+      <img class="mr-3 post-user-pic" src="{{user.image}}">
+      <div class="media-body">
+        <h3 class="mt-0">{{user.fullname}}</h3>
+        <h4>{{title}} <small class="red"><i class="fa fa-globe"></i></small></h4>
+        <p>{{body}}</p>
+        <small>{{date}}</small>
+        <br>
+        <p>
+          <a href="/editPost/{{_id}}"><i class="fa fa-pencil"></i></a>
+        </p>
+      </div>
+    </div>
+    <hr>
+    </hr>
+    {{else}}
+    <p>You do not have any posts ...</p>
+    {{/each}}
   </div>
 </div>
